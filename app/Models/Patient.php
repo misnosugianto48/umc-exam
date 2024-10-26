@@ -19,4 +19,14 @@ class Patient extends Model
     {
         return $this->hasMany(Consultation::class, 'id_patient', 'id');
     }
+
+    /**
+     * Get all of the payments for the Patient
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'id_patient', 'id');
+    }
 }

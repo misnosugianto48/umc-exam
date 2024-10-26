@@ -23,8 +23,42 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+
+                    <form class="row g-3 mt-4" method="GET" action="{{ route('admin.index') }}">
+                        @csrf
+                        <div class="col-md-6">
+                            <label for="nik" class="form-label">Cari Pasien</label>
+                            <input type="text" class="form-control" id="nik" name="nik"
+                                placeholder="masukan nik" value="{{ request('nik') }}">
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Data Pencarian</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @forelse ($patient as $p)
+                                            <th scope="row">{{ $p->name }}</th>
+                                        @empty
+                                            <th> Pasien Tidak Ada, Tambah Pasien <a class="btn btn-warning"
+                                                    href="{{ route('admin.add-patient') }}">+</a></th>
+                                        @endforelse
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>

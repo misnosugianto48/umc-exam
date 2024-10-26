@@ -53,6 +53,8 @@ Route::middleware(['auth', 'role:cashier'])->group(function () {
     Route::prefix('/cashier')->group(function () {
         Route::controller(CashierController::class)->group(function () {
             Route::get('/dashboard', 'index')->name('cashier.index');
+            Route::post('/store-payment', 'storePayment')->name('cashier.store-payment');
+            Route::get('/laporan', 'report')->name('cashier.report');
         });
     });
 });

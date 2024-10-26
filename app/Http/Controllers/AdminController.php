@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.dashboard');
+        $searchNik = $request->nik;
+
+        $patient = Patient::select('name')->where('nik', '=', $searchNik)->get();
+        return view('admin.dashboard', ['patient' => $patient]);
+        // dd($patient);
     }
 
 
